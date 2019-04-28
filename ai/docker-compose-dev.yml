@@ -4,7 +4,7 @@ services:
 
   ai:
     build:
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     volumes:
       - ./store:/store/
       - ./ai/:/ai/

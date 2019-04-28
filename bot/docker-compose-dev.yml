@@ -4,7 +4,7 @@ services:
 
   bot:
     build:
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     volumes:
       - ./store/:/store/
       - ./bot/:/bot/

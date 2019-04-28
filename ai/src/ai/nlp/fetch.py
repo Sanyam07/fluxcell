@@ -64,6 +64,7 @@ def fetchSepPage(url):
 
 def printPage(page):
 
+    print('printing page:')
     for name, section in page.items():
         kind = section['type']
         content = section['content']
