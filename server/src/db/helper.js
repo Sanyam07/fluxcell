@@ -3,13 +3,24 @@ import Space from './models/Space';
 import Message from './models/Message';
 import Channel from './models/Channel';
 
-export async function createUser({ userName, email, spaceId }) {
+export async function createUser({ username, email, spaceId }) {
   const user = await User.query().insert({
-    username: userName,
+    username,
     email,
     space_id: spaceId,
   });
   return user;
+}
+
+export async function updateUser({ id, username, email }) {
+  const res = await User.query()
+    .findById(id)
+    .patch({
+      username,
+      email,
+    });
+
+  return res;
 }
 
 export async function getUser(id) {

@@ -1,5 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-express';
-import { getSpace, getSpaces, createSpace, updateSpace } from './db/helper';
+import { getSpace, getSpaces, createSpace, updateSpace, createUser, updateUser } from './db/helper';
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 
@@ -17,9 +17,20 @@ const typeDefs = gql`
     updated_at: Date
   }
 
+  type User {
+    id: ID
+    spaceId: ID
+    username: String
+    email: String
+    created_at: Date
+    updated_at: Date
+  }
+
   type Mutation {
-    createSpace(name: String): Space
+    createSpace(name: String): ID
     updateSpace(id: ID, name: String): ID
+    createUser(username: String, email: String, spaceId: ID): ID
+    updateUser(id: ID, username: String, email: String): ID
   }
 
   scalar Date
@@ -53,10 +64,18 @@ const resolvers = {
   Mutation: {
     createSpace: async (_parent, args) => {
       const res = await createSpace({ name: args.name });
-      return res;
+      return res.id;
     },
     updateSpace: async (_parent, args) => {
       const res = await updateSpace({ id: args.id, name: args.name });
+      return res;
+    },
+    createUser: async (_parent, args) => {
+      const res = await createUser({ username: args.username, email: args.email, space_id: args.spaceId });
+      return res.id;
+    },
+    updateUser: async (_parent, args) => {
+      const res = await updateUser({ id: args.id, username: args.username, email: args.email });
       return res;
     },
   },
