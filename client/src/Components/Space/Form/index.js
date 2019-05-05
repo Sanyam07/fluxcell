@@ -10,6 +10,7 @@ export default compose(
     gql`
       query {
         spaces {
+          id
           name
         }
       }
