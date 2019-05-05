@@ -6,9 +6,9 @@ COPY requirements.txt /bot/
 WORKDIR /bot
 RUN pip install -r requirements.txt
 
-# Install fluxbot
+# Install bot
 COPY . /bot/
 RUN python3 setup.py install
 
-# Run fluxbot
-CMD [ "python3", "run.py" ]
+# Run bot
+ENTRYPOINT [ "python3", "-m", "run.py" ]
