@@ -1,9 +1,17 @@
 import React, { Fragment } from 'react';
+import Select from 'react-select';
 
 import { Input, Button } from 'reactstrap';
 
+const selectStyles = {
+  container: (base, state) => ({
+    ...base,
+    zIndex: '999',
+  }),
+};
+
 const Presentation = (props) => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit, data, mutate } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, data, mutate, space } = props;
 
   // console.log('mutate', mutate);
 
@@ -12,13 +20,19 @@ const Presentation = (props) => {
   return (
     <Fragment>
       <div> Spaces: </div>
-      <ul>
-        {data.spaces.map(s => (
-          <li key={`space.${s.name}`}> {s.name} </li>
-        ))}
-      </ul>
+      <Select
+        styles={{
+          menuPortal: (base) => {
+            const { zIndex, ...rest } = base; // remove zIndex from base by destructuring
+            return { ...rest, zIndex: 9999 };
+          },
+        }}
+        menuPortalTarget={document.body}
+        options={data.spaces.map(s => ({ value: s.id, label: s.name }))}
+      />
 
       <form onSubmit={handleSubmit}>
+        <div> Create new </div>
         <Input type="text" onChange={handleChange} onBlur={handleBlur} value={values.name} name="name" />
         {errors.name && touched.name && <div id="feedback">{errors.name}</div>}
 

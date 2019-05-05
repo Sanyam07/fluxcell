@@ -20,7 +20,7 @@ export default {
     });
 
     console.log('createSpace res', res);
-    setSpace(res.data);
+    setSpace(res.data.createSpace);
     data.refetch();
   },
 
