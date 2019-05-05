@@ -3,14 +3,9 @@ from flair.models import SequenceTagger
 from flair.embeddings import (DocumentPoolEmbeddings,
                               FlairEmbeddings, StackedEmbeddings)
 
-from torch import dot, norm, squeeze
 
 from pathlib import Path
 import pickle
-
-
-from odm.nlp.tensors import PCA, plot_embeddings, normalize_tensors
-from odm.nlp.parse import parse_veclang
 
 
 class Model:
@@ -56,27 +51,3 @@ class Model:
         self.doc_embedder.embed(sentence)
 
         return sentence
-
-    def mindmap(self, text):
-
-        # parsing
-        lines, arrows = parse_veclang(text)
-        sentences = [self.parse(line) for line in lines]
-        tensors = [s.get_embedding() for s in sentences]
-
-        # tensor processing
-        norm_tensors = normalize_tensors(tensors)
-        flat_tensors = PCA(norm_tensors)
-
-        # plot map
-        filename = plot_embeddings(lines, flat_tensors, arrows)
-
-        return f'Plotted mindmap to {filename}'
-
-    def similarity(self, text):
-        lines = text.split('//')
-        sentences = [self.parse(line) for line in lines]
-        vecs = [squeeze(s.embedding) for s in sentences]
-        sim = dot(vecs[0], vecs[1])/(norm(vecs[0])*norm(vecs[1]))
-
-        return f'the similarity is {sim}'
