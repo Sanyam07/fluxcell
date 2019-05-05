@@ -15,7 +15,7 @@ module.exports = {
       host: host || 'postgres',
       user: user || 'flux',
       password,
-      database,
+      database: database || 'fluxcraft',
     },
     pool: {
       min: 2,
@@ -29,7 +29,7 @@ module.exports = {
       host: host || 'postgres',
       user: user || 'flux',
       password,
-      database,
+      database: database || 'fluxcraft',
     },
     pool: {
       min: 2,
