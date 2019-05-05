@@ -15,7 +15,7 @@ from odm.nlp.parse import parse_veclang
 
 class Model:
 
-    modelpath = '/data/model/'
+    modelpath = '/store/ai/model/'
 
     def __init__(self):
 
