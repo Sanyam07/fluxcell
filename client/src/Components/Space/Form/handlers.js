@@ -1,13 +1,8 @@
-import { createSpace } from '../../../utils/clientHelper';
-
 export default {
   mapPropsToValues: () => ({ name: '' }),
 
-  // Custom sync validation
   validate: (values) => {
     const errors = {};
-
-
 
     if (!values.name) {
       errors.name = 'Required';
@@ -16,9 +11,17 @@ export default {
     return errors;
   },
 
-  handleSubmit: async (values, { setSubmitting }) => {
-    const name = values.name;
-    const res = await createSpace({ name });
+  handleSubmit: async (values, { props }) => {
+    const { name } = values;
+    const { mutate, setSpace, data } = props;
+
+    const res = await mutate({
+      variables: { name },
+    });
+
+    console.log('createSpace res', res);
+    setSpace(res.data);
+    data.refetch();
   },
 
   displayName: 'Space',

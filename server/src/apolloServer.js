@@ -3,6 +3,8 @@ import { getSpace, getSpaces, createSpace, updateSpace, createUser, updateUser }
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 
+require('dotenv').config({ path: '../.env' });
+
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Query {
@@ -63,6 +65,7 @@ const resolvers = {
   },
   Mutation: {
     createSpace: async (_parent, args) => {
+      console.log('createspace', process.env.PGHOST);
       const res = await createSpace({ name: args.name });
       return res.id;
     },

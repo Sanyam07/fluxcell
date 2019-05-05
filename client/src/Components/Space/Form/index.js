@@ -6,11 +6,21 @@ import handlers from './handlers';
 import Presentation from './Presentation';
 
 export default compose(
-  graphql(gql`
-    query {
-      spaces {
-        name
+  graphql(
+    gql`
+      query {
+        spaces {
+          name
+        }
       }
+    `,
+    {
+      pollInterval: 1000,
+    }
+  ),
+  graphql(gql`
+    mutation createSpace($name: String!) {
+      createSpace(name: $name)
     }
   `),
   withFormik(handlers)

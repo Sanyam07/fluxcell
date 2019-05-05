@@ -1,4 +1,4 @@
-import { SET_AUTH } from '../reducers/mainReducer';
+import { SET_AUTH, SET_SPACE } from '../reducers/mainReducer';
 
 export function setAuth(data) {
   return {
@@ -7,3 +7,9 @@ export function setAuth(data) {
   };
 }
 
+export function setSpace(data) {
+  return {
+    type: SET_SPACE,
+    data,
+  };
+}
