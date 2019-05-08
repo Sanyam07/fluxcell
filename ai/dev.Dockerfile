@@ -8,6 +8,7 @@ WORKDIR /ai
 # Install dependencies
 COPY requirements.txt /ai/
 RUN pip install -r requirements.txt
+RUN conda install faiss-cpu -c pytorch
 
 # Install fluxbot
 COPY . /ai/
