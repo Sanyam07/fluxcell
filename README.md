@@ -31,23 +31,26 @@ To run a development build, which should only be rebuilt when dependencies chang
   - *config* - create / modify / destroy objects
 
 * **document** - nested JSON like record type checked by the ai
-  - *record* - raw document
+  - *source* - input document
+    + *record* - source record
     + *message* - raw chat message
     + *file* - raw file
     + *link* - raw url
-  - *artifact* - parsed document
+  - *target* - output document
+    + *artifact* - parsed record
+    + *codex* - parsed message
     + *entity* - parsed node document
     + *relation* - parsed edge document
-    + *reference* - resource source and cache location and time
+    + *reference* - parsed resource & cache location and time
 
 * **agent** - an entity with permissions in the RBAC system, each top-level list item contained in the next
   - *user* - an individual agent
     + *member* - a human individual agent
-        bot - a virtual individual agent
-    + *group* - a collective of individual agents
-        team - a hierarchical group
-        circle - a nonhierarchical group
-    + *org* - a collective of groups
+    + bot - a virtual individual agent
+  - *group* - a collective of individual agents
+    + team - a hierarchical group
+    + circle - a nonhierarchical group
+  - *org* - a collective of groups
 
 * **tool** - eventual representation of infrastructure and app endpoints
 
