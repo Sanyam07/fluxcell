@@ -1,8 +1,6 @@
 from ai.core import AI
 
-
 ai = AI()
-
 
 test_lines = [
     'this is a monkey',
@@ -14,6 +12,8 @@ test_lines = [
     'I want orange'
 ]
 
-
 for line in test_lines:
     ai.parse(line)
+
+results = ai.search('ape', 5)
+print(results)

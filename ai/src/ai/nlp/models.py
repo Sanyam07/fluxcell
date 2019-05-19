@@ -1,8 +1,3 @@
-import numpy as np
-import pandas as pd
-
-import faiss
-
 from flair.data import Sentence
 from flair.models import SequenceTagger
 from flair.embeddings import (DocumentPoolEmbeddings,
@@ -10,38 +5,8 @@ from flair.embeddings import (DocumentPoolEmbeddings,
                               WordEmbeddings)
 
 from pathlib import Path
+
 import pickle
-
-
-class Codex:
-
-    def __init__(self, dim):
-
-        self.dim = dim
-        self._index = faiss.IndexFlatL2(self.dim)
-        self.index = faiss.IndexIDMap(self._index)
-        self.table = pd.DataFrame(columns=['sentence'])
-        self.counter = 0
-
-    def add(self, sentence):
-
-        nextId = self.counter
-        df = self.table
-        self.table = df.append(
-          pd.Series({'sentence': sentence}, name=nextId),
-          ignore_index=True
-        )
-        vec = sentence.embedding.numpy()
-        self.index.add_with_ids(vec, np.array([nextId]))
-        self.counter += 1
-
-    def search(self, query, k=5):
-
-        query_vec = query.embedding.numpy()
-
-        dists, ids = self.index.search(query_vec, k)
-        for ident in ids[0]:
-            print(self.table.loc[ident, 'sentence'])
 
 
 class Embedder:

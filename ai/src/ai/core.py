@@ -1,4 +1,5 @@
-from ai.nlp.models import Embedder, Codex
+from ai.nlp.models import Embedder
+from ai.nlp.indeces import FaissIndexMap
 
 
 class AI:
@@ -7,14 +8,19 @@ class AI:
 
         self.embedder = Embedder()
         self.dim = self.embedder.dim
-        self.codex = Codex(self.dim)
+        self.index = FaissIndexMap(self.dim)
 
-    def parse(self, text):
+    def parse(self, documents):
 
-        sentence = self.embedder.embed(text)
-        self.codex.add(sentence)
+        for document in documents:
+            sentence = self.embedder.embed(document)
+            self.index.add(sentence)
+
+        return sentence
 
     def search(self, query, k=5):
 
         query_sentence = self.embedder.embed(query)
-        self.codex.search(query_sentence, k)
+        results = self.index.search(query_sentence, k)
+
+        return results

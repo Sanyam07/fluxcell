@@ -89,7 +89,7 @@ def plot_embeddings(lines, tensors, arrows):
     return filename
 
 
-def mindmap(model, text):
+def mindplot(model, text):
 
     # parsing
     lines, arrows = parse_veclang(text)
@@ -100,7 +100,7 @@ def mindmap(model, text):
     norm_tensors = normalize_tensors(tensors)
     flat_tensors = PCA(norm_tensors)
 
-    # plot map
+    # plot plot
     filename = plot_embeddings(lines, flat_tensors, arrows)
 
-    return f'Plotted mindmap to {filename}'
+    return f'Plotted mindplot to {filename}'
