@@ -1,11 +1,9 @@
-import DB from './db/';
-import { createServer } from './apolloServer';
 import express from 'express';
+import DB from './db/';
 
 require('@babel/polyfill');
 const server = require('./server');
-const restApi = require('./restApi');
-const socketApi = require('./socketApi');
+const createSocketApi = require('./socketApi');
 const cors = require('cors');
 
 const db = new DB();
@@ -13,9 +11,7 @@ db.init();
 
 const app = express();
 app.use(cors());
-const { httpServer } = server.createServer(app);
 
-restApi(app);
-socketApi({ httpServer });
+const { httpServer, apolloServer } = server.createServer(app);
 
-const apolloServer = createServer(app);
+createSocketApi({ httpServer });

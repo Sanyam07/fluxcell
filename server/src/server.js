@@ -1,3 +1,5 @@
+import { createServer } from './apolloServer';
+
 const http = require('http');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -9,7 +11,7 @@ module.exports.createServer = (app) => {
   app.use(
     bodyParser.urlencoded({
       extended: true,
-    }),
+    })
   );
   app.use(bodyParser.json());
 
@@ -19,12 +21,15 @@ module.exports.createServer = (app) => {
   const portHttp = process.env.PORT_HTTP || DEFAULT_PORT_HTTP;
   app.set('portHttp', portHttp);
 
-
   httpServer.listen(app.get('portHttp'), () =>
-    console.log(chalk.green(`Dev api server listening on http://localhost:${portHttp}`)),
+    console.log(chalk.green(`Dev api server listening on http://localhost:${portHttp}`))
   );
+
+  // Create apollo server
+  const apolloServer = createServer(app);
 
   return {
     httpServer,
+    apolloServer,
   };
 };
