@@ -4,7 +4,7 @@ import { getUser, createMessage } from './db/helper';
 const io = require('socket.io')();
 const uuid = require('uuid/v1');
 
-module.exports = function socketApi({ httpServer }) {
+module.exports = function createSocketApi({ httpServer }) {
   io.on('connection', (socket) => {
     socket.on('chatTestListener', (msg) => {
       log('socket is subscribing to chatTestListener ');
