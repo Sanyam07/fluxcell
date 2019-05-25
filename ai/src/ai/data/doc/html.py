@@ -76,12 +76,6 @@ class Page(Doc):
         else:
             return result
 
-
-    def as_string(self):
-
-        for sec in self.codex:
-            print(sec.as_string())
-
     def print_stuff(self, stuff, indent=''):
 
         if isinstance(stuff, dict):
@@ -101,52 +95,3 @@ class Page(Doc):
     def print_thingy(self):
 
         print(repr(self.codex))
-
-
-class Section(Doc):
-
-    header_types = ['h'+str(i) for i in range(1, 11)]
-    leaf_types = ['p', 'blockquote']
-    div_types = ['div']
-
-    def __init__(self, source, ref, sec=None):
-
-        self.ref = ref
-        self.sec = sec
-        self.name = None
-        self.source = source
-
-    def parse(self):
-
-        # secNum = []
-        self.data = {}
-
-        for item in self.source:
-            if item['type'] in self.leaf_types:
-                self.data
-
-
-class Header:
-
-    def __init__(self, ref, sec=None):
-        pass
-
-
-class Subsec(Section):
-    pass
-
-
-class Supersec(Section):
-    pass
-
-
-class Para(Section):
-    pass
-
-
-class Quote(Para):
-    pass
-
-
-class Line(Section):
-    pass
