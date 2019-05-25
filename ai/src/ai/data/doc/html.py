@@ -76,7 +76,10 @@ class Page(Doc):
         else:
             return result
 
-    def print_stuff(self, stuff, indent=''):
+    def print_stuff(self, stuff=None, indent=''):
+
+        if not stuff:
+            stuff = self.contents
 
         if isinstance(stuff, dict):
             kind = stuff['kind']
@@ -91,7 +94,3 @@ class Page(Doc):
                 self.print_stuff(children, indent+'*')
         else:
             print(indent, stuff)
-
-    def print_thingy(self):
-
-        print(repr(self.codex))

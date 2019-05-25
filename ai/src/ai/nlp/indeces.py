@@ -1,5 +1,5 @@
 from annoy import AnnoyIndex
-from faiss import IndexFlatL2, IndexIDMap
+#from faiss import IndexFlatL2, IndexIDMap
 
 from pathlib import Path
 
