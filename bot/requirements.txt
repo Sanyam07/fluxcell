@@ -1,3 +1,0 @@
-pinhook==1.7.1
-ruamel.yaml==0.15.89
-imgurpython==1.1.7
