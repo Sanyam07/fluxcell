@@ -31,7 +31,6 @@ args="${@:2}"
 # find compose files in these dirs
 services=(
   ai
-  bot
   client 
   server
 )
