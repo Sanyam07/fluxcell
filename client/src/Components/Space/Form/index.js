@@ -15,9 +15,6 @@ export default compose(
         }
       }
     `,
-    {
-      pollInterval: 1000,
-    }
   ),
   graphql(gql`
     mutation createSpace($name: String!) {
