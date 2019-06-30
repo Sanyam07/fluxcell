@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import 'react-toastify/dist/ReactToastify.css';
 import { Error } from './CommonComponents';
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './utils/mapper';
 import RootContainer from './Containers/RootContainer';

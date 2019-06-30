@@ -1,11 +1,13 @@
-export default {
-  mapPropsToValues: () => ({ name: '' }),
+import { toast } from "react-toastify";
 
-  validate: (values) => {
+export default {
+  mapPropsToValues: () => ({ name: "" }),
+
+  validate: values => {
     const errors = {};
 
     if (!values.name) {
-      errors.name = 'Required';
+      errors.name = "Required";
     }
 
     return errors;
@@ -19,10 +21,11 @@ export default {
       variables: { name },
     });
 
-    console.log('createSpace res', res);
+    console.log("createSpace res", res);
     setSpace(res.data.createSpace);
     data.refetch();
+    toast("New channel added.");
   },
 
-  displayName: 'Space',
+  displayName: "Space",
 };
