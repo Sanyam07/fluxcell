@@ -9,5 +9,3 @@ services:
       - ./store:/store/
       - ./client:/client/
       - /client/node_modules/
-    ports:
-      - 3000:3000

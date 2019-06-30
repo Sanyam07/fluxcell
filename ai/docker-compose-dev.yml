@@ -8,5 +8,3 @@ services:
     volumes:
       - ./store:/store/
       - ./ai/:/ai/
-    ports:
-      - 5555:5555

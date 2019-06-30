@@ -9,3 +9,5 @@ services:
     restart: unless-stopped
     env_file:
       - ./ai/.env
+    ports:
+      - 5555:5555
