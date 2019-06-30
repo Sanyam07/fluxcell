@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     env_file:
       - ./server/.env
+    ports:
+      - 4000:4000
 
   server-postgres:
     image: postgres
