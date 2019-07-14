@@ -1,13 +1,13 @@
 import User from './models/User';
-import Space from './models/Space';
+import Station from './models/Station';
 import Message from './models/Message';
 import Channel from './models/Channel';
 
-export async function createUser({ username, email, spaceId }) {
+export async function createUser({ username, email, stationId }) {
   const user = await User.query().insertGraph({
     username,
     email,
-    space_id: spaceId,
+    station_id: stationId,
   });
   return user;
 }
@@ -44,26 +44,26 @@ export async function createMessage({ channelId, userId, body }) {
   return res;
 }
 
-export async function getSpace({ name }) {
-  const res = await Space.query().where('name', '=', name);
+export async function getStation({ name }) {
+  const res = await Station.query().where('name', '=', name);
   return res;
 }
 
-export async function getSpaces() {
-  const res = await Space.query();
+export async function getStations() {
+  const res = await Station.query();
   return res;
 }
 
-export async function createSpace({ name }) {
-  const res = await Space.query().insert({
+export async function createStation({ name }) {
+  const res = await Station.query().insert({
     name,
   });
 
   return res;
 }
 
-export async function updateSpace({ id, name }) {
-  const res = await Space.query()
+export async function updateStation({ id, name }) {
+  const res = await Station.query()
     .findById(id)
     .patch({
       name,
@@ -71,9 +71,9 @@ export async function updateSpace({ id, name }) {
   return res;
 }
 
-export async function createChannel({ space_id, title, topic }) {
+export async function createChannel({ stationId, title, topic }) {
   const res = await Channel.query().insert({
-    space_id,
+    station_id: stationId,
     title,
     topic,
   });

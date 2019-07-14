@@ -1,7 +1,7 @@
 import { Model } from 'objection';
 import { getLocalTime } from '../../utils/helper.js';
 import Message from './Message';
-import Space from './Space';
+import Station from './Station';
 import User from './User.js';
 
 export default class Channel extends Model {
@@ -19,12 +19,12 @@ export default class Channel extends Model {
           to: 'message.channel_id',
         },
       },
-      space: {
+      station: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Space,
+        modelClass: Station,
         join: {
-          from: 'channel.space_id',
-          to: 'space.id',
+          from: 'channel.station_id',
+          to: 'station.id',
         },
       },
       user: {

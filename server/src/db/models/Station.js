@@ -3,9 +3,9 @@ import Channel from './Channel';
 import User from './User';
 import { getLocalTime } from '../../utils/helper.js';
 
-export default class Space extends Model {
+export default class Station extends Model {
   static get tableName() {
-    return 'space';
+    return 'station';
   }
   static get relationMappings() {
     return {
@@ -13,16 +13,16 @@ export default class Space extends Model {
         relation: Model.HasManyRelation,
         modelClass: Channel,
         join: {
-          from: 'space.id',
-          to: 'channel.space_id',
+          from: 'station.id',
+          to: 'channel.station_id',
         },
       },
       user: {
         relation: Model.HasManyRelation,
         modelClass: User,
         join: {
-          from: 'space.id',
-          to: 'user.space_id',
+          from: 'station.id',
+          to: 'user.station_id',
         },
       },
     };

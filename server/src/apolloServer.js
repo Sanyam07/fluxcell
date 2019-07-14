@@ -1,5 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-express';
-import { getSpace, getSpaces, createSpace, updateSpace, createUser, updateUser, getUser } from './db/helper';
+import { getStation, getStations, createStation, updateStation, createUser, updateUser, getUser } from './db/helper';
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 
@@ -8,12 +8,12 @@ require('dotenv').config({ path: '../.env' });
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Query {
-    spaces: [Space]
-    spaceByName(name: String!): Space
+    getStations: [Station]
+    getStationByName(name: String!): Station
     getUser(id: ID, email: String, username: String): User
   }
 
-  type Space {
+  type Station {
     id: ID!
     name: String!
     created_at: Date!
@@ -22,7 +22,7 @@ const typeDefs = gql`
 
   type User {
     id: ID!
-    spaceId: ID!
+    stationId: ID!
     username: String!
     email: String!
     created_at: Date!
@@ -30,9 +30,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createSpace(name: String!): ID!
-    updateSpace(id: ID!, name: String!): ID!
-    createUser(username: String!, email: String!, spaceId: ID!): ID!
+    createStation(name: String!): ID!
+    updateStation(id: ID!, name: String!): ID!
+    createUser(username: String!, email: String!, stationId: ID!): ID!
     updateUser(id: ID!, username: String!, email: String!): ID!
   }
 
@@ -58,9 +58,9 @@ const dateType = new GraphQLScalarType({
 
 const resolvers = {
   Query: {
-    spaces: () => getSpaces(),
-    spaceByName: async (_parent, args) => {
-      const res = await getSpace({ name: args.name });
+    getStations: () => getStations(),
+    getStationByName: async (_parent, args) => {
+      const res = await getStation({ name: args.name });
       return res[0];
     },
     getUser: async (_parent, args) => {
@@ -73,17 +73,16 @@ const resolvers = {
     },
   },
   Mutation: {
-    createSpace: async (_parent, args) => {
-      console.log('createspace', process.env.PGHOST);
-      const res = await createSpace({ name: args.name });
+    createStation: async (_parent, args) => {
+      const res = await createStation({ name: args.name });
       return res.id;
     },
-    updateSpace: async (_parent, args) => {
-      const res = await updateSpace({ id: args.id, name: args.name });
+    updateStation: async (_parent, args) => {
+      const res = await updateStation({ id: args.id, name: args.name });
       return res;
     },
     createUser: async (_parent, args) => {
-      const res = await createUser({ username: args.username, email: args.email, spaceId: args.spaceId });
+      const res = await createUser({ username: args.username, email: args.email, stationId: args.stationId });
       return res.id;
     },
     updateUser: async (_parent, args) => {
