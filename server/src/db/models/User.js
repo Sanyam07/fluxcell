@@ -16,15 +16,15 @@ export default class User extends Model {
         modelClass: Message,
         join: {
           from: 'user.id',
-          to: 'message.userid',
+          to: 'message.user_id',
         },
       },
       space: {
         relation: Model.BelongsToOneRelation,
         modelClass: Space,
         join: {
-          from: 'space.id',
-          to: 'user.spaceid',
+          from: 'user.space_id',
+          to: 'space.id',
         },
       },
       channel: {
@@ -33,8 +33,8 @@ export default class User extends Model {
         join: {
           from: 'user.id',
           through: {
-            from: 'user_channel.userid',
-            to: 'user_channel.channelid',
+            from: 'user_channel.user_id',
+            to: 'user_channel.channel_id',
           },
           to: 'channel.id',
         },

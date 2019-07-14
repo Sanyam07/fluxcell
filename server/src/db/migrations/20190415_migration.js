@@ -1,4 +1,4 @@
-exports.up = knex =>
+exports.up = (knex) =>
   knex.schema
     .createTable('space', (table) => {
       table.increments('id').primary();
@@ -63,7 +63,7 @@ exports.up = knex =>
       table.timestamp('updated_at', true);
     });
 
-exports.down = knex =>
+exports.down = (knex) =>
   knex.schema
     .dropTableIfExists('space')
     .dropTableIfExists('channel')
