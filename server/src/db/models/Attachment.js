@@ -13,8 +13,8 @@ export default class Attachment extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: Message,
         join: {
-          from: 'message.id',
-          to: 'attachment.messageid',
+          from: 'attachment.message_id',
+          to: 'message.id',
         },
       },
     };

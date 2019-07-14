@@ -1,5 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-express';
-import { getSpace, getSpaces, createSpace, updateSpace, createUser, updateUser } from './db/helper';
+import { getSpace, getSpaces, createSpace, updateSpace, createUser, updateUser, getUser } from './db/helper';
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 
@@ -9,30 +9,31 @@ require('dotenv').config({ path: '../.env' });
 const typeDefs = gql`
   type Query {
     spaces: [Space]
-    spaceByName(name: String): Space
+    spaceByName(name: String!): Space
+    getUser(id: ID, email: String, username: String): User
   }
 
   type Space {
-    id: ID
-    name: String
-    created_at: Date
+    id: ID!
+    name: String!
+    created_at: Date!
     updated_at: Date
   }
 
   type User {
-    id: ID
-    spaceId: ID
-    username: String
-    email: String
-    created_at: Date
+    id: ID!
+    spaceId: ID!
+    username: String!
+    email: String!
+    created_at: Date!
     updated_at: Date
   }
 
   type Mutation {
-    createSpace(name: String): ID
-    updateSpace(id: ID, name: String): ID
-    createUser(username: String, email: String, spaceId: ID): ID
-    updateUser(id: ID, username: String, email: String): ID
+    createSpace(name: String!): ID!
+    updateSpace(id: ID!, name: String!): ID!
+    createUser(username: String!, email: String!, spaceId: ID!): ID!
+    updateUser(id: ID!, username: String!, email: String!): ID!
   }
 
   scalar Date
@@ -62,6 +63,14 @@ const resolvers = {
       const res = await getSpace({ name: args.name });
       return res[0];
     },
+    getUser: async (_parent, args) => {
+      const res = await getUser({
+        id: args.id,
+        email: args.email,
+        username: args.username,
+      });
+      return res[0];
+    },
   },
   Mutation: {
     createSpace: async (_parent, args) => {
@@ -74,7 +83,7 @@ const resolvers = {
       return res;
     },
     createUser: async (_parent, args) => {
-      const res = await createUser({ username: args.username, email: args.email, space_id: args.spaceId });
+      const res = await createUser({ username: args.username, email: args.email, spaceId: args.spaceId });
       return res.id;
     },
     updateUser: async (_parent, args) => {

@@ -14,7 +14,7 @@ export default class Space extends Model {
         modelClass: Channel,
         join: {
           from: 'space.id',
-          to: 'channel.spaceid',
+          to: 'channel.space_id',
         },
       },
       user: {
@@ -22,7 +22,7 @@ export default class Space extends Model {
         modelClass: User,
         join: {
           from: 'space.id',
-          to: 'user.spaceid',
+          to: 'user.space_id',
         },
       },
     };
