@@ -16,9 +16,18 @@ This wraps docker-compose, so you can:
 
 To run a development build, which should only be rebuilt when dependencies change.
 
+### Examples
+
+Restart client and server:
+
+```bash
+./fluxcell --dev up --build client server
+
+```
+
 ## Diagrams
 
-Basic layout:  
+Basic layout:
 ![fluxcell layout](docs/fluxcell-layout.png)
 
 Architecture Sketch:
