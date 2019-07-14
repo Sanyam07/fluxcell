@@ -24,7 +24,7 @@ export default {
     console.log("createSpace res", res);
     setSpace(res.data.createSpace);
     data.refetch();
-    toast("New channel added.");
+    toast("New space added.");
   },
 
   displayName: "Space",

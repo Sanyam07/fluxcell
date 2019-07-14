@@ -19,4 +19,4 @@ Server which contains REST and Websocket endpoints.
 
     node ./src/index
 
-The API server will run on `http://localhost:4444` and `https://localhost:4445`
+The Apollo GraphQL server will run on `http://localhost:4000`
