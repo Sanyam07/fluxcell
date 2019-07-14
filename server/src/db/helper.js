@@ -4,7 +4,7 @@ import Message from './models/Message';
 import Channel from './models/Channel';
 
 export async function createUser({ username, email, spaceId }) {
-  const user = await User.query().insert({
+  const user = await User.query().insertGraph({
     username,
     email,
     space_id: spaceId,
@@ -23,9 +23,15 @@ export async function updateUser({ id, username, email }) {
   return res;
 }
 
-export async function getUser(id) {
-  const user = await User.query().findById(id);
-  return user;
+export async function getUser({ id = null, email = null, username = null }) {
+  if (id) {
+    return await User.query().where('id', id);
+  } else if (email) {
+    return await User.query().where('email', email);
+  } else if (username) {
+    return await User.query().where('username', username);
+  }
+  return null;
 }
 
 export async function createMessage({ channelId, userId, body }) {
@@ -65,9 +71,9 @@ export async function updateSpace({ id, name }) {
   return res;
 }
 
-export async function createChannel({ spaceId, title, topic }) {
+export async function createChannel({ space_id, title, topic }) {
   const res = await Channel.query().insert({
-    space_id: spaceId,
+    space_id,
     title,
     topic,
   });

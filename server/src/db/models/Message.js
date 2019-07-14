@@ -15,16 +15,16 @@ export default class Message extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: Channel,
         join: {
-          from: 'channel.id',
-          to: 'message.channelid',
+          from: 'message.channel_id',
+          to: 'channel.id',
         },
       },
       user: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'user.id',
-          to: 'message.userid',
+          from: 'message.user_id',
+          to: 'user.id',
         },
       },
       attachment: {
@@ -32,7 +32,7 @@ export default class Message extends Model {
         modelClass: Attachment,
         join: {
           from: 'message.id',
-          to: 'attachment.messageid',
+          to: 'attachment.message_id',
         },
       },
     };
