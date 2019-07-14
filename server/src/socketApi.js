@@ -19,14 +19,15 @@ module.exports = function createSocketApi({ httpServer }) {
       io.sockets.emit('chatTestEmit', `Hello ${msg}, now is ${new Date().toString()}`);
     });
 
-    socket.on('chatListener', async ({ channelId, userId, body }) => {
+    socket.on('chatListener', async ({ channelId, username, body }) => {
       log('saving messages to space');
       try {
-        await createMessage({ channelId, userId, body });
+        // TODO: getUserByUserName()
+        await createMessage({ channelId, userId: 1, body });
       } catch (err) {
         log(err);
       }
-      const user = await getUser(userId);
+      const user = await getUser(1);
 
       io.sockets.emit('chatServer', { id: uuid(), user, body });
     });

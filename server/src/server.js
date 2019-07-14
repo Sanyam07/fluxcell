@@ -22,7 +22,7 @@ module.exports.createServer = (app) => {
   app.set('portHttp', portHttp);
 
   httpServer.listen(app.get('portHttp'), () =>
-    console.log(chalk.green(`Dev api server listening on http://localhost:${portHttp}`))
+    console.log(chalk.green(`HTTP server listening at http://localhost:${portHttp}`))
   );
 
   // Create apollo server
