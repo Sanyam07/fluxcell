@@ -12,8 +12,7 @@ test_lines = [
     'I want orange'
 ]
 
-for line in test_lines:
-    ai.parse(line)
+ai.parse(test_lines)
 
 results = ai.search('ape', 5)
 print(results)
