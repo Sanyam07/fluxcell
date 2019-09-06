@@ -8,3 +8,5 @@ services:
     volumes:
       - ./store:/store/
       - ./ai/:/ai/
+    ports:
+      - 8888:8888

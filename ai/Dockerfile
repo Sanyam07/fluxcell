@@ -1,16 +1,16 @@
-FROM pytorch/pytorch
+FROM python:3.7.4
 
 # UTF-8 Support in the Shell
 RUN printf 'export LC_ALL=C.UTF-8\nexport LANG=C.UTF-8\nexport LANGUAGE=C.UTF-8' >> /root/.bashrc
 
-# Install dependencies
-COPY requirements.txt /ai/
-
 WORKDIR /ai
-RUN pip install -r requirements.txt
-RUN conda install faiss-cpu -c pytorch
 
-# Install fluxbot
+# Install dependencies
+COPY Requirements.txt /ai/
+
+RUN pip install -r Requirements.txt
+
+# Install ai
 COPY . /ai/
 RUN python3 setup.py install
 
